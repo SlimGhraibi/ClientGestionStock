@@ -6,12 +6,14 @@ import { ContentComponent } from './components/content/content.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProduitComponent } from './components/produit/produit.component';
 import { AppRoutingModule } from './app.routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [NavbarComponent, SidebarComponent, ContentComponent, DashboardComponent, ProduitComponent],
   exports: [NavbarComponent, SidebarComponent, ContentComponent]

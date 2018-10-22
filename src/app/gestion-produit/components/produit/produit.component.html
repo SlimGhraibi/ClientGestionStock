@@ -1,3 +1,70 @@
-<p>
-  produit works!
-</p>
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-lg-7">
+        <div class="card ">
+            <div class="card-header bg-info text-white">
+                Produits
+            </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Référence</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Prix Unitaire</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let produit of produits">
+            <td>{{ produit.ref }}</td>
+            <td>{{ produit.quantite }}</td>
+            <td>{{ produit.prixUnitaire }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="card">
+        <div class="card-header bg-info text-white">
+          Ajouter Produit
+        </div>
+        <div class="card-body">
+            <form [formGroup]="produitForm">
+              <div class="form-group">
+                  <label for="reference">Référence produit</label>
+                  <input type="text" class="form-control" formControlName="ref" />
+              </div>
+              <div class="alert alert-danger" *ngIf="produitForm.controls['ref'].invalid
+                                                    && (produitForm.controls['ref'].touched
+                                                    || produitForm.controls['ref'].dirty)" >
+                  Référence est obligatoire !
+              </div>
+              <div class="form-group">
+                    <label for="quantite">Quantité produit</label>
+                    <input type="number" class="form-control"  formControlName="quantite" />
+              </div>
+              <div class="alert alert-danger" *ngIf="produitForm.controls['quantite'].invalid
+                                                      && (produitForm.controls['quantite'].touched
+                                                      || produitForm.controls['quantite'].dirty)" >
+                  Quantité est obligatoire !
+              </div>
+              <div class="form-group">
+                      <label for="prix">Prix produit</label>
+                      <input type="number" class="form-control"  formControlName="prixUnitaire" />
+              </div>
+              <div class="alert alert-danger" *ngIf="produitForm.controls['prixUnitaire'].invalid
+                                                      && (produitForm.controls['prixUnitaire'].touched
+                                                      || produitForm.controls['prixUnitaire'].dirty)" >
+                  Prix est obligatoire !
+              </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <button type="button" [disabled]="produitForm.pristine || produitForm.invalid" class="btn btn-info">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
