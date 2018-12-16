@@ -3,9 +3,9 @@ export class Produit {
     public quantite: Number;
     public prixUnitaire: Number;
 
-  constructor(_ref: String, _quantite: Number, _prixUnitaire) {
-              this.ref = _ref;
-              this.quantite = _quantite;
-              this.prixUnitaire = _prixUnitaire;
+  constructor(json: any) {
+              this.ref = json.ref;
+              this.quantite = json.quantite;
+              this.prixUnitaire = json.prixUnitaire;
               }
 }

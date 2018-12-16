@@ -7,15 +7,19 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProduitComponent } from './components/produit/produit.component';
 import { AppRoutingModule } from './app.routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProduitService } from './services/produit.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   imports: [
     CommonModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [NavbarComponent, SidebarComponent, ContentComponent, DashboardComponent, ProduitComponent],
-  exports: [NavbarComponent, SidebarComponent, ContentComponent]
+  exports: [NavbarComponent, SidebarComponent, ContentComponent],
+  providers  : [ProduitService]
 })
 export class GestionProduitModule { }
