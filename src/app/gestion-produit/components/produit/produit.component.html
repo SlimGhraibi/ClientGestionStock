@@ -87,7 +87,7 @@
                 <p>
                   Voulez vous vraiment suprimer ce produit ?
                 </p>
-                <button class="btn btn-success" (click)="deleteProduit()">Confirmer</button>
+                <button class="btn btn-success" [disabled]= "!selectedProduit.ref" (click)="deleteProduit()">Confirmer</button>
               </div>
 
         </div>

@@ -1,8 +1,11 @@
+import { Produit } from './../../models/produit.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Produit } from '../../models/produit.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProduitService } from '../../services/produit.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-produit',
@@ -19,14 +22,16 @@ export class ProduitComponent implements OnInit, OnDestroy {
   selectedProduit: Produit;
   disabled: Boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private produitService: ProduitService) {
-
+  constructor(private formBuilder: FormBuilder,
+              private produitService: ProduitService,
+              private route: ActivatedRoute) {
    }
 
   ngOnInit() {
     this.createForm();
     this.initProduit();
-    this.loadProduits();
+    /* this.loadProduits();  on va changer cette methode par le resolver */
+    this.produits = this.route.snapshot.data.produits;
   }
 
   console() {
