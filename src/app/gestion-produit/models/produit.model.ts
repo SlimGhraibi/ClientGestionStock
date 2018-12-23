@@ -1,11 +1,13 @@
 export class Produit {
-    public ref: String;
+    public id: number;
     public quantite: Number;
     public prixUnitaire: Number;
+    public ref: String;
 
   constructor(json: any) {
-              this.ref = json.ref;
+              this.id = json.id;
               this.quantite = json.quantite;
               this.prixUnitaire = json.prixUnitaire;
+              this.ref = json.ref;
               }
 }

@@ -1,6 +1,5 @@
 import { Produit } from './../../models/produit.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Produit } from '../../models/produit.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProduitService } from '../../services/produit.service';
 import { Subscription } from 'rxjs';
@@ -80,8 +79,7 @@ export class ProduitComponent implements OnInit, OnDestroy {
 
   updateProduit(): void {
     const produit = new Produit(this.produitForm.value);
-    const element = {produit : produit, selectedProduit : selectedProduit }
-    this.produitSubscription = this.produitService.updateProduit(this.selectedProduit, produit).subscribe(
+    this.produitSubscription = this.produitService.updateProduit(this.selectedProduit).subscribe(
      (value) => {
        this.loadProduits();
        console.log('Subscription Ok !');
@@ -96,8 +94,9 @@ export class ProduitComponent implements OnInit, OnDestroy {
  }
 
  deleteProduit(): void {
-  this.produitSubscription = this.produitService.deleteProduit(this.selectedProduit.ref).subscribe(
+  this.produitSubscription = this.produitService.deleteProduit(this.selectedProduit.id).subscribe(
    (value) => {
+     console.log('this produit id====>' + this.selectedProduit.id);
      this.loadProduits();
      this.selectedProduit = new Produit({});
      console.log('Subscription Ok !');
@@ -117,8 +116,11 @@ export class ProduitComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-     this.produitSubscription.unsubscribe();
-     console.log('unsubscription Ok !');
+    if (this.produitSubscription !== undefined) {
+        this.produitSubscription.unsubscribe();
+        console.log('unsubscription ok !');
+    }
+
   }
 
 }
