@@ -2,12 +2,12 @@
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
       <a class="nav-link"
-        [routerLink]="['/dashboard']"
+        [routerLink]="[{outlets : {contentOutlet : 'dashboard'}}]"
         routerLinkActive="active">Dashboard</a>
     </li>
     <li class="nav-item">
       <a class="nav-link"
-        [routerLink]="['/produit']"
+        [routerLink]="[{outlets : {contentOutlet : 'produit'}}]"
         routerLinkActive="active">Produits</a>
     </li>
     <li class="nav-item">
