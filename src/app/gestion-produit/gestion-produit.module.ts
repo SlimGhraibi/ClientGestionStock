@@ -14,6 +14,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { XhrInterceptor } from './interceptor/xhr.interceptor';
 import { CookieService } from 'ngx-cookie-service';
+import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { CookieService } from 'ngx-cookie-service';
     HttpClientModule,
     FormsModule
   ],
-  declarations: [NavbarComponent, SidebarComponent, ContentComponent, DashboardComponent, ProduitComponent, LoginComponent, HomeComponent],
+  declarations: [NavbarComponent, SidebarComponent, ContentComponent, DashboardComponent, ProduitComponent, LoginComponent, HomeComponent, UtilisateurComponent],
   exports: [NavbarComponent, SidebarComponent, ContentComponent, ProduitComponent, LoginComponent, HomeComponent],
   providers  : [ProduitService, AppService, { provide : HTTP_INTERCEPTORS, useClass : XhrInterceptor, multi: true}, CookieService]
 })

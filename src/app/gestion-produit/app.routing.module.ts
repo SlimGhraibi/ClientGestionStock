@@ -1,3 +1,4 @@
+import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProduitResolver } from './components/produit/produit.resolver';
 import {  NgModule } from '@angular/core';
@@ -24,6 +25,11 @@ export const appRoutes: Routes = [
         component : DashboardComponent,
         outlet : 'contentOutlet'
       },
+      {
+        path : 'utilisateur',
+        component : UtilisateurComponent,
+        outlet : 'contentOutlet'
+      }
     ]
   },
   {
