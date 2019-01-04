@@ -14,7 +14,9 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { XhrInterceptor } from './interceptor/xhr.interceptor';
 import { CookieService } from 'ngx-cookie-service';
-import { UtilisateurComponent } from './utilisateur/utilisateur.component';
+import { UtilisateurComponent } from './components/utilisateur/utilisateur.component';
+import { StoreModule } from '@ngrx/store';
+import { principalReducer } from './shared/principal.reducer';
 
 @NgModule({
   imports: [
@@ -22,9 +24,11 @@ import { UtilisateurComponent } from './utilisateur/utilisateur.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot({principal: principalReducer})
   ],
-  declarations: [NavbarComponent, SidebarComponent, ContentComponent, DashboardComponent, ProduitComponent, LoginComponent, HomeComponent, UtilisateurComponent],
+  declarations: [NavbarComponent, SidebarComponent, ContentComponent,
+                 DashboardComponent, ProduitComponent, LoginComponent, HomeComponent, UtilisateurComponent],
   exports: [NavbarComponent, SidebarComponent, ContentComponent, ProduitComponent, LoginComponent, HomeComponent],
   providers  : [ProduitService, AppService, { provide : HTTP_INTERCEPTORS, useClass : XhrInterceptor, multi: true}, CookieService]
 })

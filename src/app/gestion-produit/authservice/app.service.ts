@@ -1,17 +1,22 @@
+import { SAVE_PRINCIPAL } from './../shared/save.principal.action';
 import { API_URLS } from './../config/api.url.config';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { finalize } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
+import { PrincipalState } from '../shared/principal.state';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
+
   public isAuthenticated: Boolean = false;
 
   constructor(private http: HttpClient,
-              private cookieService: CookieService) { }
+              private cookieService: CookieService,
+              private store: Store<PrincipalState>) { }
+
   /*on a utilisé cette méthode pour l'authentification coté Angular*/
   /*
   authenticate(credentials, callback) {
@@ -32,8 +37,23 @@ export class AppService {
         this.cookieService.set('token', token);
 
         this.http.get(API_URLS.USER_URL).subscribe(response => {
+          /* this method will call a principal method in spring boot hwo return user information */
           if (response && response['name']) {
+            /*
+            this.user = new Principal( response.principal.accountNonExpired,
+                                       response.principal.accountNonLocked,
+                                       response.principal.authorities,
+                                       response.principal.credentialsNonExpired,
+                                       response.principal.enabled,
+                                       response.principal.username);
+                                       */
+              console.log('response', response);
               this.isAuthenticated = true;
+              this.store.dispatch({
+                  type: SAVE_PRINCIPAL,
+                  payload: response
+              });
+              console.log('store', this.store);
           } else {
               this.isAuthenticated = false;
           }

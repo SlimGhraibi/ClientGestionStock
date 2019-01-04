@@ -1,4 +1,3 @@
-import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProduitResolver } from './components/produit/produit.resolver';
 import {  NgModule } from '@angular/core';
@@ -6,6 +5,7 @@ import { RouterModule, Routes} from '@angular/router';
 import { ProduitComponent } from './components/produit/produit.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
+import { UtilisateurComponent } from './components/utilisateur/utilisateur.component';
 
 export const appRoutes: Routes = [
   {

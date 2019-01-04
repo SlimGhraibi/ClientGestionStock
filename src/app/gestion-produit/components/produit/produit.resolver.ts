@@ -11,7 +11,6 @@ export class ProduitResolver implements Resolve<any> {
   }
 
   resolve() {
-    console.log('resolver executed ! ');
     return this.produitService.getProduits();
   }
 }
