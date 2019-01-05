@@ -31,6 +31,7 @@ export class ProduitComponent implements OnInit, OnDestroy {
     this.initProduit();
     /* this.loadProduits();  on va changer cette methode par le resolver */
     this.produits = this.route.snapshot.data.produits;
+    console.log('produits ===> ' + this.produits);
   }
 
   console() {
@@ -46,7 +47,7 @@ export class ProduitComponent implements OnInit, OnDestroy {
   }
 
   loadProduits(): void {
-   this.produitSubscription = this.produitService.getProduits().subscribe(
+   this.produitSubscription = this.produitService.getAll().subscribe(
     (value) => {
       this.produits = value;
       console.log('Subscription Ok !');
@@ -62,7 +63,7 @@ export class ProduitComponent implements OnInit, OnDestroy {
 
   addProduit(): void {
      const produit = new Produit(this.produitForm.value);
-     this.produitSubscription = this.produitService.addProduit(produit).subscribe(
+     this.produitSubscription = this.produitService.add(produit).subscribe(
       (value) => {
         this.initProduit();
         this.loadProduits();
@@ -79,7 +80,7 @@ export class ProduitComponent implements OnInit, OnDestroy {
 
   updateProduit(): void {
     const produit = new Produit(this.produitForm.value);
-    this.produitSubscription = this.produitService.updateProduit(this.selectedProduit).subscribe(
+    this.produitSubscription = this.produitService.update(this.selectedProduit).subscribe(
      (value) => {
        this.loadProduits();
        console.log('Subscription Ok !');
@@ -94,7 +95,7 @@ export class ProduitComponent implements OnInit, OnDestroy {
  }
 
  deleteProduit(): void {
-  this.produitSubscription = this.produitService.deleteProduit(this.selectedProduit.id).subscribe(
+  this.produitSubscription = this.produitService.delete(this.selectedProduit.id).subscribe(
    (value) => {
      console.log('this produit id====>' + this.selectedProduit.id);
      this.loadProduits();

@@ -1,3 +1,4 @@
+import { UserService } from './services/UserService';
 import { AppService } from './authservice/app.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -30,6 +31,10 @@ import { principalReducer } from './shared/principal.reducer';
   declarations: [NavbarComponent, SidebarComponent, ContentComponent,
                  DashboardComponent, ProduitComponent, LoginComponent, HomeComponent, UtilisateurComponent],
   exports: [NavbarComponent, SidebarComponent, ContentComponent, ProduitComponent, LoginComponent, HomeComponent],
-  providers  : [ProduitService, AppService, { provide : HTTP_INTERCEPTORS, useClass : XhrInterceptor, multi: true}, CookieService]
+  providers  : [ProduitService, AppService,
+                { provide : HTTP_INTERCEPTORS, useClass : XhrInterceptor, multi: true},
+                CookieService,
+                UserService
+               ]
 })
 export class GestionProduitModule { }
