@@ -18,6 +18,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { UtilisateurComponent } from './components/utilisateur/utilisateur.component';
 import { StoreModule } from '@ngrx/store';
 import { principalReducer } from './shared/principal.reducer';
+import { CrudComponent } from './components/crud/crud.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import { principalReducer } from './shared/principal.reducer';
     StoreModule.forRoot({principal: principalReducer})
   ],
   declarations: [NavbarComponent, SidebarComponent, ContentComponent,
-                 DashboardComponent, ProduitComponent, LoginComponent, HomeComponent, UtilisateurComponent],
+                 DashboardComponent, ProduitComponent, LoginComponent, HomeComponent, UtilisateurComponent, CrudComponent],
   exports: [NavbarComponent, SidebarComponent, ContentComponent, ProduitComponent, LoginComponent, HomeComponent],
   providers  : [ProduitService, AppService,
                 { provide : HTTP_INTERCEPTORS, useClass : XhrInterceptor, multi: true},

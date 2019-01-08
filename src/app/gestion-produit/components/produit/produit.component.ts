@@ -13,7 +13,28 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProduitComponent implements OnInit, OnDestroy {
 
+  produits: Produit[];
+  produit: Produit = new Produit();
+  produitForm: FormGroup;
 
+  constructor(private formBuilder: FormBuilder,
+              private produitService: ProduitService,
+              private route: ActivatedRoute) {
+}
+
+  ngOnInit() {
+    this.produits = this.route.snapshot.data.produits;
+    this.produitForm = this.formBuilder.group({
+      ref : ['', Validators.required],
+      quantite: ['', Validators.required],
+      prixUnitaire: ['', Validators.required]
+     });
+  }
+
+  ngOnDestroy() {
+  }
+
+  /*
   produits: Produit[];
   produitForm: FormGroup;
   produitSubscription: Subscription;
@@ -29,13 +50,9 @@ export class ProduitComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.createForm();
     this.initProduit();
-    /* this.loadProduits();  on va changer cette methode par le resolver */
+    // this.loadProduits();  on va changer cette methode par le resolver
     this.produits = this.route.snapshot.data.produits;
     console.log('produits ===> ' + this.produits);
-  }
-
-  console() {
-    console.log(this.selectedProduit);
   }
 
   createForm() {
@@ -123,5 +140,5 @@ export class ProduitComponent implements OnInit, OnDestroy {
     }
 
   }
-
+  */
 }
