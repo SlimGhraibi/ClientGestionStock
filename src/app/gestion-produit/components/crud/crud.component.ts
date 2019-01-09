@@ -1,3 +1,4 @@
+import { DataModel } from './../../models/data.model';
 import { CrudService } from './../../shared/crud.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -12,10 +13,12 @@ import { ProduitService } from '../../services/produit.service';
 })
 export class CrudComponent implements OnInit, OnDestroy {
 
+  @Input() title: String;
   @Input() data: any;
   @Input() service: CrudService;
   @Input() initItem: any; /* Produit, User...*/
   @Input() initForm: FormGroup;
+  @Input() dataModelList: DataModel[];
 
   crudForm: FormGroup;
   itemSubscription: Subscription;
@@ -27,6 +30,7 @@ export class CrudComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
+    console.log('data ==> ', this.data);
     this.createForm();
     this.init();
   }

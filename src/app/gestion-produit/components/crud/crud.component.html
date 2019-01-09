@@ -1,35 +1,34 @@
+<ng-container *ngIf="data; else loading">
 <div class="container">
   <br>
   <div class="row">
     <div class="col-lg-7">
         <div class="card ">
             <div class="card-header bg-info text-white">
-                Produits
+                {{ title }}
             </div>
       <table class="table table-hover">
         <thead>
-          <!--
+
           <tr>
-            <th scope="col">Référence</th>
-            <th scope="col">Quantité</th>
-            <th scope="col">Prix Unitaire</th>
-            <th scope="col"><button class="btn btn-outline-primary"
-                                    (click)="operation = 'add'; initProduit();">ADD</button></th>
+            <th scope="col" *ngFor="let model of dataModelList" >{{ model.columnReference }}</th>
+            <th scope="col">
+              <button class="btn btn-outline-primary"
+                                    (click)="operation = 'add'; init();">ADD</button>
+            </th>
           </tr>
-          -->
+
         </thead>
         <tbody>
-          <!--
-          <tr *ngFor="let produit of produits">
-            <td>{{ produit.ref }}</td>
-            <td>{{ produit.quantite }}</td>
-            <td>{{ produit.prixUnitaire }}</td>
+
+          <tr *ngFor="let item of data"> <!-- boucle pour remplir les ligne-->
+            <td *ngFor="let model of dataModelList">{{ item[model.columnName] }}</td> <!-- boucle pour remplir les colones-->
             <td><button class="btn btn-outline-primary"
-                        (click)="operation = 'edit'; selectedProduit = produit; console();">Edit</button></td>
+                        (click)="operation = 'edit'; selectedItem = item;">Edit</button></td>
             <td><button class="btn btn-outline-danger"
-                        (click)="operation = 'remove'; selectedProduit = produit;">Remove</button></td>
+                        (click)="operation = 'remove'; selectedItem = item;">Remove</button></td>
           </tr>
-          -->
+
         </tbody>
       </table>
     </div>
@@ -45,43 +44,32 @@
         </div>
 
         <div class="card-body">
-            <div *ngIf="operation == 'add' || operation =='edit'">
-              <!--
-              <form [formGroup]="produitForm">
-                    <div class="form-group">
-                        <label for="reference">Référence produit</label>
-                        <input type="text" class="form-control" formControlName="ref" [(ngModel)]="selectedProduit.ref"/>
+            <div *ngIf="operation == 'add' || operation == 'edit'">
+              <form [formGroup]="crudForm">
+                <div  *ngFor="let model of dataModelList" [ngSwitch]="model.dataType">
+                    <div class="form-group" *ngIf="!model.readOnly" >
+                        <label>{{model.columnReference}}:</label>
+                        <input *ngSwitchCase="'string'"
+                               type="text"
+                               class="form-control"
+                               formControlName="{{model.columnName}}"
+                               [(ngModel)]="selectedItem[model.columnName]"/>
+
+                        <input *ngSwitchCase="'number'"
+                               type="number"
+                               class="form-control"
+                               formControlName="{{ model.columnName }}"
+                               [(ngModel)]="selectedItem[model.columnName]"/>
                     </div>
-                    <div class="alert alert-danger" *ngIf="produitForm.controls['ref'].invalid
-                                                          && (produitForm.controls['ref'].touched
-                                                          || produitForm.controls['ref'].dirty)" >
-                        Référence est obligatoire !
-                    </div>
-                    <div class="form-group">
-                          <label for="quantite">Quantité produit</label>
-                          <input type="number" class="form-control"  formControlName="quantite" [(ngModel)]="selectedProduit.quantite"/>
-                    </div>
-                    <div class="alert alert-danger" *ngIf="produitForm.controls['quantite'].invalid
-                                                            && (produitForm.controls['quantite'].touched
-                                                            || produitForm.controls['quantite'].dirty)" >
-                        Quantité est obligatoire !
-                    </div>
-                    <div class="form-group">
-                            <label for="prix">Prix produit</label>
-                            <input type="number" class="form-control"  formControlName="prixUnitaire" [(ngModel)]="selectedProduit.prixUnitaire"/>
-                    </div>
-                    <div class="alert alert-danger" *ngIf="produitForm.controls['prixUnitaire'].invalid
-                                                            && (produitForm.controls['prixUnitaire'].touched
-                                                            || produitForm.controls['prixUnitaire'].dirty)" >
-                        Prix est obligatoire !
-                    </div>
-                  </form>
-                  -->
+                </div>
+
+              </form>
+
                   <div class="card-footer">
                       <button type="button"
-                              [disabled]="produitForm.pristine || produitForm.invalid"
+                              [disabled]="crudForm.pristine || crudForm.invalid"
                               class="btn btn-info"
-                              (click)="operation == 'add' ? addProduit() : updateProduit() ">
+                              (click)="operation == 'add' ? add() : update() ">
                       {{ operation == "add" ? "Ajouter" : operation == "edit" ? "Modifier" : '' }}
                       </button>
                   </div>
@@ -96,9 +84,11 @@
                 </p>
                 <button class="btn btn-success" [disabled]= "!selectedItem.id" (click)="delete()">Confirmer</button>
               </div>
-            -->
+
         </div>
       </div>
     </div>
   </div>
 </div>
+</ng-container>
+<ng-template #loading>chargement en court ...</ng-template>

@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProduitService } from '../../services/produit.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { DataModel } from '../../models/data.model';
 
 
 @Component({
@@ -11,27 +12,36 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './produit.component.html',
   styleUrls: ['./produit.component.css']
 })
-export class ProduitComponent implements OnInit, OnDestroy {
+export class ProduitComponent implements OnInit {
 
   produits: Produit[];
   produit: Produit = new Produit();
   produitForm: FormGroup;
+  title: String = 'Liste des produits';
+  produitsModel: DataModel[];
 
   constructor(private formBuilder: FormBuilder,
-              private produitService: ProduitService,
+              public produitService: ProduitService,
               private route: ActivatedRoute) {
-}
+  }
 
   ngOnInit() {
     this.produits = this.route.snapshot.data.produits;
     this.produitForm = this.formBuilder.group({
+      id : [''],
       ref : ['', Validators.required],
       quantite: ['', Validators.required],
       prixUnitaire: ['', Validators.required]
      });
+     this.produitsModel = [
+                           new DataModel('id', 'ID', 'number', true, []),
+                           new DataModel('ref', 'Référence', 'string', false, []),
+                           new DataModel('quantite', 'Quantite', 'number', false, []),
+                           new DataModel('prixUnitaire', 'Prix Unitaire', 'number', false, [])
+                          ];
   }
 
-  ngOnDestroy() {
+
   }
 
   /*
@@ -141,4 +151,4 @@ export class ProduitComponent implements OnInit, OnDestroy {
 
   }
   */
-}
+

@@ -47,7 +47,6 @@ export class AppService {
                                        response.principal.enabled,
                                        response.principal.username);
                                        */
-              console.log('response', response);
               this.isAuthenticated = true;
               this.store.dispatch({
                   type: SAVE_PRINCIPAL,
