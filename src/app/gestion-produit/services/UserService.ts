@@ -24,7 +24,6 @@ export class UserService implements CrudService {
 
   }
   delete(id: number): Observable<any> {
-    return this.httpClient.delete(API_URLS.PRODUITS_URL + `/${id}`);
-
+    return this.httpClient.delete(API_URLS.USER_CRUD_URL + `/${id}`);
   }
 }
