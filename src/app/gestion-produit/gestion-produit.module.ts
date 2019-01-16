@@ -19,6 +19,8 @@ import { UtilisateurComponent } from './components/utilisateur/utilisateur.compo
 import { StoreModule } from '@ngrx/store';
 import { principalReducer } from './shared/principal.reducer';
 import { CrudComponent } from './components/crud/crud.component';
+import { ChartModule } from 'angular2-chartjs';
+import { MyChartComponent } from './components/my-chart/my-chart.component';
 
 @NgModule({
   imports: [
@@ -27,10 +29,11 @@ import { CrudComponent } from './components/crud/crud.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot({principal: principalReducer})
+    StoreModule.forRoot({principal: principalReducer}),
+    ChartModule
   ],
   declarations: [NavbarComponent, SidebarComponent, ContentComponent,
-                 DashboardComponent, ProduitComponent, LoginComponent, HomeComponent, UtilisateurComponent, CrudComponent],
+                 DashboardComponent, ProduitComponent, LoginComponent, HomeComponent, UtilisateurComponent, CrudComponent, MyChartComponent],
   exports: [NavbarComponent, SidebarComponent, ContentComponent, ProduitComponent, LoginComponent, HomeComponent],
   providers  : [ProduitService, AppService,
                 { provide : HTTP_INTERCEPTORS, useClass : XhrInterceptor, multi: true},

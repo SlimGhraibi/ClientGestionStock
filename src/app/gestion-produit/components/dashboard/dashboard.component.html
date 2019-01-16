@@ -1,3 +1,28 @@
-<p>
-  dashboard works!
-</p>
+<br>
+<div class="row">
+<div class="col-lg-5">
+  <app-my-chart [type]="'bar'"
+                [title]="'Produits par catégories'"
+                [data]="produitsData"></app-my-chart>
+</div>
+<div class="col-lg-7">
+  <app-my-chart [type]="'line'"
+                [title]="'Représentation linéaire des produits'"
+                [data]="produitsData"></app-my-chart>
+</div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-lg-5">
+    <app-my-chart [type]="'bar'"
+                  [title]="'Utilisateur par roles'"
+                  [data]="userData"></app-my-chart>
+  </div>
+  <div class="col-lg-7">
+    <app-my-chart [type]="'line'"
+                  [title]="'Représentation linéaire des utilisateurs'"
+                  [data]="userData"></app-my-chart>
+  </div>
+</div>
